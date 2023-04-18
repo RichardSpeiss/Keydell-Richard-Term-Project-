@@ -55,16 +55,16 @@ def target_stocks(ticker):
 
 
 
-# ticker = "amzn"
-# stocks = target_stocks(ticker)
-# print()
-# print()
-# print()
-# print()
+ticker = "amzn"
+stocks = target_stocks(ticker)
+print()
+print()
+print()
+print()
 
-# for key in stocks:
-#     print(key)
-#     print()
-#     print(stocks.get(key))
-#     print("----")
-#     print()
+for key in stocks:
+    print(key)
+    print()
+    print(stocks.get(key))
+    print("----")
+    print()
