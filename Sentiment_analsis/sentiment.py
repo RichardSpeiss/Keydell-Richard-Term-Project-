@@ -10,7 +10,7 @@ newsapi = NewsApiClient(api_key='f533c47222e44b40a1ae23d73bf08d86')
 keyword = 'AAPL'
 
 # Get the 5 most recent articles that contain the keyword
-articles = newsapi.get_everything(q=keyword, language='en', sort_by='publishedAt', page_size=2)
+articles = newsapi.get_everything(q=keyword, language='en', sort_by='publishedAt', )
 
 articlenumber = 0 #to count the number articles released
 total = 0

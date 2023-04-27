@@ -87,8 +87,8 @@ classifier = TextClassifier.load('en-sentiment')
 
 
 # Get the 5 most recent articles that contain the keyword
-articles = newsapi.get_everything(q=stocks.get('main'), from_param="2023-03-18",
-        to="2023-04-17",
+articles = newsapi.get_everything(q=stocks.get('main'), from_param="2023-03-27",
+        to="2023-04-27",
         language="en",
         sort_by="relevancy",
         page=1)   
@@ -152,26 +152,66 @@ for article in articles['articles']:
         total = articlenumber
         print(total)
 
-print(article_list)
 
-#math starts here 
+
+
+
+
+
+
+    #math starts here 
 
 avg = 0 
-total = 0 
+ratingtotal = 0 
 
 
 for item in article_list:
     if item.get('Sentiment') == "POSITIVE":
-        total = total + item.get('Score')
+        ratingtotal = ratingtotal + item.get('Score')
     elif item.get('Sentiment') == "NEGATIVE":
-        total = total - item.get('Score')
+        ratingtotal = ratingtotal - item.get('Score')
     else:
         print("Cant addd this becasue error")
 
+    #print (ratingtotal)
+    avg = ratingtotal / 5
 
-print(total)
+holdrange = .25
+sentrating = ""
+
+if holdrange <= avg >= -holdrange:
+    sentrating = "neutral"
+
+if avg < -holdrange:
+    sentrating = "negative"
+
+if avg > holdrange:
+    sentrating = "positive"
 
 
+print(f' This is the avg rating of the {avg}')
+
+print (f' The sentiment analysis is: {sentrating}')
+
+
+import pandas as pd
+import yfinance as yf
+import numpy as np
+import time
+import yfinance as yf
+
+# List of stock tickers
+tickers = ['AAPL', 'GOOG', 'TSLA']
+
+# Fetch data for multiple tickers
+data = yf.Tickers(tickers)
+
+# Access data for each ticker
+for ticker in tickers:
+    print(ticker, data.tickers[ticker].info['recommendationKey'])
+
+
+#print(article_list)
 
 
 
