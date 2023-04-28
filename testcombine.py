@@ -103,6 +103,7 @@ article_list = []
 
 # Loop through each article and print the body text
 for article in articles['articles']:
+  
     if article['source']['name'] == 'Yahoo Entertainment':
         articlenumber += 1
         # Check if we have reached the maximum number of articles

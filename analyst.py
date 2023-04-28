@@ -5,7 +5,7 @@ import time
 import yfinance as yf
 
 # List of stock tickers
-tickers = ['AAPL', 'GOOG', 'TSLA']
+tickers = ['AAPL', 'GOOG', 'TSLA', 'NVDA', 'MSFT', 'AMZN']
 
 # Fetch data for multiple tickers
 data = yf.Tickers(tickers)
