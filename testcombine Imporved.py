@@ -55,7 +55,7 @@ def target_stocks(ticker):
 
 
 # Define the keyword you want to search for
-ticker = "MSFT"
+ticker = "JXN"
 stocks = target_stocks(ticker)
 print()
 print()
@@ -85,8 +85,8 @@ def article_list(stocks):
 
 
     # Get the 5 most recent articles that contain the keyword
-    articles = newsapi.get_everything(q=stocks.get('main'), from_param="2023-03-27",
-        to="2023-04-27",
+    articles = newsapi.get_everything(q=stocks.get('main'), from_param="2023-03-28",
+        to="2023-04-28",
         language="en",
         sort_by="relevancy",
         page=1)   
@@ -281,3 +281,4 @@ def our_result():
 print(f' After reading through all the articles the decision is that {ticker} shows rather {(average_sentiment(article_list(stocks)))} analysis.')
 print(f' The analyst says: {(analyst_rating (ticker))} ')
 print(f' We think that you should {our_result()} {ticker}.')
+print()

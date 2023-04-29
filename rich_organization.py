@@ -1,6 +1,6 @@
 from newsapi.newsapi_client import NewsApiClient
-# from flair.models import TextClassifier
-# from flair.data import Sentence
+from flair.models import TextClassifier
+from flair.data import Sentence
 from bs4 import BeautifulSoup
 import yfinance as yf
 import pandas as pd
@@ -41,10 +41,14 @@ def grab_trending_tickers():
         stock_data.pop(-2)
         data.append(stock_data)
 
+    exclude = ['S&P 500', 'Dow Jones Industrial Average','NASDAQ Composite','Russell 2000', 'NASDAQ','^']
+
     trending_tickers = []
     for item in data:
         ticker = yf.Ticker(item[0]).info['symbol']
-        trending_tickers.append(ticker)
+        if ticker not in exclude:
+            if "^" not in ticker:
+                trending_tickers.append(ticker)
     
     return trending_tickers
 
@@ -137,12 +141,16 @@ def average_sentiment(articles):
     """returns an average sentiment rating for the {max_articles} most relevant articles
     uses the holdrange parameter to differentiate between hold/buy/sell
     input is articles as list"""
+
+    print(len(articles))
     
     total_score = 0
     articlenumber = 0 #to count the number articles released
     max_articles = 5
 
-    while articlenumber < max_articles:
+    use = min(max_articles,len(articles))
+
+    while articlenumber < use:
         content = get_content(articles[articlenumber])
         score = get_sentiment(content)
         total_score += score
@@ -205,6 +213,7 @@ def market_mood(main_tickers):
 
     stocktickers_dic = target_stocks(main_tickers)
     stocknames_dic = {}
+    print()
 
     for key in stocktickers_dic:
         for ticker in stocktickers_dic[key]:
@@ -212,6 +221,7 @@ def market_mood(main_tickers):
             type_ = key
             company = grab_name(ticker)
             articles = get_articles(company)
+            print(company)
             sent_rate = average_sentiment(articles)
             analyst_rate = analyst_rating(ticker)
             our_rate = combine_scoreandrating(analyst_rate,sent_rate)
@@ -240,10 +250,13 @@ def market_mood(main_tickers):
 
 
 def main():
+    print(grab_trending_tickers())
     mytickers = ["MSFT","AAPL","AMZN"]
     result = market_mood(mytickers)
     print(result)
 
+
+    
 
 if __name__ == "__main__":
     main()
