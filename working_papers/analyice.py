@@ -16,20 +16,17 @@
 # print(ratings)
 
 
-
-
-
 import requests
 
 # Replace YOUR_API_KEY with your actual Alpha Vantage API key
-API_KEY = 'YOUR_API_KEY'
-symbol = 'AAPL' # replace AAPL with your desired stock symbol
+API_KEY = "YOUR_API_KEY"
+symbol = "AAPL"  # replace AAPL with your desired stock symbol
 
-url = f'https://www.alphavantage.co/query?function=OVERVIEW&symbol={symbol}&apikey={API_KEY}'
+url = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={symbol}&apikey={API_KEY}"
 
 response = requests.get(url)
 data = response.json()
 
-rating = data['AnalystRating']
+rating = data["AnalystRating"]
 
-print(f'The analyst rating for {symbol} is {rating}.')
+print(f"The analyst rating for {symbol} is {rating}.")
