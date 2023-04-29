@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 import yfinance as yf
 import pandas as pd
 
-# import numpy as np_____________________________________________________ I dont think we are using this
 import requests
 import datetime
 import csv
@@ -96,8 +95,8 @@ def get_articles(company: str) -> list:
 
     all_articles = newsapi.get_everything(
         q=company,
-        from_param="2023-03-28",
-        to="2023-04-27",
+        from_param="2023-03-29",
+        to="2023-04-28",
         language="en",
         sort_by="relevancy",
         page=1,
@@ -297,7 +296,7 @@ def create_CSV(stocknames_dic: dict) -> None:
 def main():
 
     # input any stock tickers you wish to get a rating for
-    mytickers = ["MSFT", "AAPL", "AMZN"]
+    mytickers = ["JXN", "AAL", "LULU"]
 
     result = market_mood(mytickers)
     print()
@@ -308,6 +307,7 @@ def main():
     print()
     print()
     create_CSV(result)
+    print("All Done :)")
 
 
 if __name__ == "__main__":
