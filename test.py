@@ -1,4 +1,8 @@
 import yfinance as yf
-msft = yf.Ticker("MSFT")
-company_name = msft.info['longName']
-print(company_name)
+
+def get_ticker(company_name):
+    ticker = yf.Ticker(company_name).info['symbol']
+    return ticker
+
+ticker = get_ticker("Microsoft Corporation")
+print(ticker)
