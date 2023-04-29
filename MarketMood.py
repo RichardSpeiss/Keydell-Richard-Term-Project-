@@ -3,9 +3,14 @@ from flair.models import TextClassifier
 from flair.data import Sentence
 from bs4 import BeautifulSoup
 import yfinance as yf
-import pandas as pd
-import numpy as np
+# import pandas as pd____________________________________________________
+# import numpy as np_____________________________________________________ I dont think we are using these
 import requests
+import datetime
+import csv
+import os
+
+
 
 
 def grab_name(ticker):
@@ -41,20 +46,19 @@ def grab_trending_tickers():
         stock_data.pop(-2)
         data.append(stock_data)
 
-    exclude = ['S&P 500', 'Dow Jones Industrial Average','NASDAQ Composite','Russell 2000', 'NASDAQ','^']
+    # exclude = ['S&P 500', 'Dow Jones Industrial Average','NASDAQ Composite','Russell 2000', 'NASDAQ','^']
 
     trending_tickers = []
     for item in data:
         ticker = yf.Ticker(item[0]).info['symbol']
-        if ticker not in exclude:
-            if "^" not in ticker:
-                trending_tickers.append(ticker)
+        if "^" not in ticker:
+            trending_tickers.append(ticker)
     
     return trending_tickers
 
 
 
-def target_stocks(main_tickers):
+def target_stocks(query_tickers):
     """ returns a dictionary of trending stock tickers and inputted tickers 
     with keys "trending" and "main" respectively"""
 
@@ -63,7 +67,7 @@ def target_stocks(main_tickers):
     trending = grab_trending_tickers()
 
     # dictionary with both sets of tickers
-    stocktickers_dic = {"main":main_tickers}
+    stocktickers_dic = {"query":query_tickers}
     stocktickers_dic["trending"] = trending
 
     # print(stocks)
@@ -142,7 +146,7 @@ def average_sentiment(articles):
     uses the holdrange parameter to differentiate between hold/buy/sell
     input is articles as list"""
 
-    print(len(articles))
+    # print(len(articles))
     
     total_score = 0
     articlenumber = 0 #to count the number articles released
@@ -177,7 +181,11 @@ def analyst_rating(ticker):
     """returns analyst stock rating from yahoo finance for a given ticker"""
 
     data = yf.Tickers(ticker)
-    rate = (data.tickers[ticker].info['recommendationKey'])
+
+    if 'recommendationKey' in data.tickers[ticker].info:
+        rate = data.tickers[ticker].info['recommendationKey']
+    else:
+        rate = 'none'
 
     return rate
 
@@ -187,13 +195,12 @@ def analyst_rating(ticker):
 def combine_scoreandrating(analyst_rate,sent_rate):
     """returns our rating using inputted analyst rating (str) and sentiment score (str)"""
 
-
-    if 'buy' in analyst_rate:
+    if 'buy' in analyst_rate or 'out' in analyst_rate:
         if sent_rate == 'negative':
             result = 'Hold'
         else:
             result = 'Buy'
-    elif 'sell' in analyst_rate:
+    elif 'sell' in analyst_rate or 'under' in analyst_rate:
         if sent_rate == 'positive':
             result = 'Hold'
         else: 
@@ -209,27 +216,29 @@ def combine_scoreandrating(analyst_rate,sent_rate):
     return result 
 
 
-def market_mood(main_tickers):
+def market_mood(query_tickers):
+    """given list of tickers, returns dictionary of given stocks and yahoo trending stocks
+    with key as company name (from grab_name()), then sub dictionaries with 'Type' (main or trending), 
+    'Ticker', 'Analyst Rating' (from analyst_rating), 'Sentiment Rating' (from average_sentiment), 
+    and 'MarketMood Rating' (from combine_scoreandrating)"""
 
-    stocktickers_dic = target_stocks(main_tickers)
+    stocktickers_dic = target_stocks(query_tickers)
     stocknames_dic = {}
-    print()
 
     for key in stocktickers_dic:
         for ticker in stocktickers_dic[key]:
-
             type_ = key
             company = grab_name(ticker)
             articles = get_articles(company)
             print(company)
             sent_rate = average_sentiment(articles)
+            # sent_rate = 'positive'
             analyst_rate = analyst_rating(ticker)
             our_rate = combine_scoreandrating(analyst_rate,sent_rate)
     
-
             ticker_dic = {}
-            ticker_dic["Type"] = type_
             ticker_dic["Ticker"] = ticker
+            ticker_dic["Type"] = type_
             ticker_dic["Analyst Rating"] = analyst_rate
             ticker_dic["Sentiment Rating"] = sent_rate
             ticker_dic["MarketMood Rating"] = our_rate
@@ -239,8 +248,27 @@ def market_mood(main_tickers):
     return stocknames_dic
 
 
+# stocknames_dic = {'Microsoft Corporation': {'Ticker': 'MSFT','Type': 'main', 'Analyst Rating': 'buy', 'Sentiment Rating': 'negative', 'MarketMood Rating': 'Hold'}, 'Apple Inc.': {'Ticker': 'AAPL', 'Type': 'main', 'Analyst Rating': 'buy', 'Sentiment Rating': 'negative', 'MarketMood Rating': 'Hold'}, 'Amazon.com, Inc.': {'Ticker': 'AMZN', 'Type': 'main', 'Analyst Rating': 'buy', 'Sentiment Rating': 'negative', 'MarketMood Rating': 'Hold'}}
 
-    
+
+def create_CSV(stocknames_dic):
+    """add data in stocknames_dic from 'market_mood()' to a csv file in repository's
+    data folder, replase current addition if code was already run on todays date """
+
+    date = datetime.date.today()
+
+    path = f'data/MarketMood_Ratings_{date}.csv'
+
+    if os.path.exists(path):
+        os.remove(path)
+
+    with open(path, 'w', newline='') as f:
+        writer = csv.writer(f)
+        fields = ('Company Name', 'Ticker', 'Type', 'Analyst Rating', 'Sentiment Rating', 'MarketMood Rating')
+        writer.writerow(fields)
+
+        for key in stocknames_dic:
+            writer.writerow([key] + list(stocknames_dic.get(key).values()))
 
 
 # print(f' After reading through all the articles the decision is that {ticker} shows rather {(average_sentiment(article_list(stocks)))} analysis.')
@@ -248,14 +276,10 @@ def market_mood(main_tickers):
 # print(f' We think that you should {our_result()} {ticker}.')
 
 
-
 def main():
-    print(grab_trending_tickers())
     mytickers = ["MSFT","AAPL","AMZN"]
     result = market_mood(mytickers)
-    print(result)
-
-
+    create_CSV(result)
     
 
 if __name__ == "__main__":
