@@ -1,32 +1,30 @@
 Company Name,Ticker,Previous Close,Type,Analyst Rating,Sentiment Rating,MarketMood Rating
 Jackson Financial Inc.,JXN,36.0099983215332,query,hold,neutral,Hold
 American Airlines Group Inc.,AAL,13.640000343322754,query,hold,positive,Buy
-Lululemon Athletica Inc.,LULU,379.92999267578125,query,buy,neutral,Buy
-Bitcoin USD,BTC-USD,29213.40625,trending,none,negative,Sell
-"The PNC Financial Services Group, Inc.",PNC,130.25,trending,buy,negative,Hold
-Ethereum USD,ETH-USD,1903.6685791015625,trending,none,neutral,Hold
-Dogecoin USD,DOGE-USD,0.08159922063350677,trending,none,negative,Sell
-Crown Castle Inc.,CCI,123.08999633789062,trending,buy,neutral,Buy
+Lululemon Athletica Inc.,LULU,379.92999267578125,query,buy,positive,Buy
+Bitcoin USD,BTC-USD,29175.697265625,trending,none,negative,Sell
 Warby Parker Inc.,WRBY,10.529999732971191,trending,buy,negative,Hold
-Anheuser-Busch InBev SA/NV,BUD,64.97000122070312,trending,hold,neutral,Hold
-Shiba Inu USD,SHIB-USD,1.0291520084138028e-05,trending,none,neutral,Hold
-"TG Therapeutics, Inc.",TGTX,24.829999923706055,trending,buy,positive,Buy
-"NextEra Energy, Inc.",NEE,76.62999725341797,trending,buy,neutral,Buy
-Bitcoin CAD,BTC-CAD,39894.59765625,trending,none,neutral,Hold
-The Coca-Cola Company,KO,64.1500015258789,trending,buy,neutral,Buy
-Realty Income Corporation,O,62.84000015258789,trending,buy,negative,Hold
-Solana USD,SOL-USD,23.051639556884766,trending,none,neutral,Hold
-Morgan Stanley,MS,89.97000122070312,trending,buy,negative,Hold
-XRP USD,XRP-USD,0.47879651188850403,trending,none,positive,Buy
-3M Company,MMM,106.22000122070312,trending,hold,neutral,Hold
-JPMorgan Chase & Co.,JPM,138.24000549316406,trending,buy,negative,Hold
-Novo Nordisk A/S,NVO,167.08999633789062,trending,buy,neutral,Buy
+Crown Castle Inc.,CCI,123.08999633789062,trending,buy,negative,Hold
+Ethereum USD,ETH-USD,1897.347900390625,trending,none,positive,Buy
+"The PNC Financial Services Group, Inc.",PNC,130.25,trending,buy,negative,Hold
+Dogecoin USD,DOGE-USD,0.08109643310308456,trending,none,negative,Sell
 "PepsiCo, Inc.",PEP,190.88999938964844,trending,buy,negative,Hold
-"Medical Properties Trust, Inc.",MPW,8.770000457763672,trending,buy,negative,Hold
-The Procter & Gamble Company,PG,156.3800048828125,trending,buy,negative,Hold
-ASML Holding N.V.,ASML,636.8599853515625,trending,buy,negative,Hold
-Raytheon Technologies Corporation,RTX,99.9000015258789,trending,buy,negative,Hold
-SVB Financial Group,SIVBQ,0.49000000953674316,trending,buy,negative,Hold
-"NIKE, Inc.",NKE,126.72000122070312,trending,buy,neutral,Buy
-Albemarle Corporation,ALB,185.4600067138672,trending,buy,negative,Hold
+Anheuser-Busch InBev SA/NV,BUD,64.97000122070312,trending,hold,neutral,Hold
+CVS Health Corporation,CVS,73.30999755859375,trending,buy,negative,Hold
+Realty Income Corporation,O,62.84000015258789,trending,buy,negative,Hold
+Bitcoin CAD,BTC-CAD,39853.96875,trending,none,neutral,Hold
 International Business Machines Corporation,IBM,126.41000366210938,trending,hold,negative,Sell
+Shiba Inu USD,SHIB-USD,1.023896493279608e-05,trending,none,neutral,Hold
+"Merck & Co., Inc.",MRK,115.47000122070312,trending,buy,negative,Hold
+Enterprise Products Partners L.P.,EPD,26.309999465942383,trending,buy,neutral,Buy
+The Coca-Cola Company,KO,64.1500015258789,trending,buy,neutral,Buy
+Raytheon Technologies Corporation,RTX,99.9000015258789,trending,buy,negative,Hold
+Pfizer Inc.,PFE,38.88999938964844,trending,buy,negative,Hold
+ASML Holding N.V.,ASML,636.8599853515625,trending,buy,neutral,Buy
+3M Company,MMM,106.22000122070312,trending,hold,neutral,Hold
+"United Parcel Service, Inc.",UPS,179.80999755859375,trending,buy,negative,Hold
+Verizon Communications Inc.,VZ,38.83000183105469,trending,hold,negative,Sell
+Bank of America Corporation,BAC,29.280000686645508,trending,buy,negative,Hold
+Caterpillar Inc.,CAT,218.8000030517578,trending,hold,negative,Sell
+Walmart Inc.,WMT,150.97000122070312,trending,buy,negative,Hold
+Johnson & Johnson,JNJ,163.6999969482422,trending,buy,positive,Buy

@@ -91,7 +91,7 @@ def get_articles(company: str) -> list:
     """uses NewsAPI to return a list of all the Yahoo Entertainment news articles with a company
     name as a keyword given certain parameters, in order of relevancy. Each article is a dict"""
 
-    newsapi = NewsApiClient(api_key="f533c47222e44b40a1ae23d73bf08d86")
+    newsapi = NewsApiClient(api_key="966d42a19bf042c68e6bec614e7e74c4")
 
     today = datetime.date.today()
     start = today - datetime.timedelta(days=25)
