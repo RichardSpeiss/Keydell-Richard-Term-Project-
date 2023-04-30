@@ -4,7 +4,7 @@ Keydell Fuller and Richard Speiss
 Spring 2023
 
 
-## Purpose:
+## Purpose
 
 Our project is focused on using y.finance and flair sentiment analysis to create trade recommendations for given stocks, as well as those trending on Yahoo finance. We hope to streamline the investing process for those new to stock market investing and help them progess more quickly to more advanced trading strategies. While our product does provide trade recomendations, we urge users to be cautious and use their own judgement when trading stocks. We are not liable for any financial consequences resulting from the use of our product. 
 
