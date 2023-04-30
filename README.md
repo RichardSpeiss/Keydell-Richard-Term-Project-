@@ -71,5 +71,5 @@ The MarketMood Rating is produced by the combine_scoreandrating() function. It u
     The negative rating gives evidence of possible price decreases 
 
 
-### Directions
+## Directions
 To use this code, fist clone this repository on your computer. Input any stock tickers you wish to get a rating for in the mytickers[] list. After running the code, the CSV file will be created in the data folder of the repository with the date. Running the code after previously running it the same day will rewrite the CSV file. 
