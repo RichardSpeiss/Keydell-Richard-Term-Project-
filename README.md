@@ -37,38 +37,38 @@ The MarketMood Rating is produced by the combine_scoreandrating() function. It u
 
 * Analyst Sell or Strong Sell Rating with a
 
-Sentiment Positive Rating produces → Hold
-The positive rating gives evidence of possible price increases
+    Sentiment Positive Rating produces → Hold
+    The positive rating gives evidence of possible price increases
 
-Sentiment Neutral Rating produces → Sell
-No additional value from sentiment analysis 
+    Sentiment Neutral Rating produces → Sell
+    No additional value from sentiment analysis 
 
-Sentiment Negative Rating produces → Sell
-The negative rating enforces the Analyst decision 
+    Sentiment Negative Rating produces → Sell
+    The negative rating enforces the Analyst decision 
 
         
 * Analyst Hold Rating with a
 
-Sentiment Positive Rating produces → Buy
-The positive rating gives evidence of possible price increases
+    Sentiment Positive Rating produces → Buy
+    The positive rating gives evidence of possible price increases
 
-Sentiment Neutral Rating produces → Hold
-No additional value from sentiment analysis 
+    Sentiment Neutral Rating produces → Hold
+    No additional value from sentiment analysis 
 
-Sentiment Negative Rating produces → Sell
-The negative rating gives evidence of possible price decreases 
+    Sentiment Negative Rating produces → Sell
+    The negative rating gives evidence of possible price decreases 
 
 
 * Analyst Buy or Strong Buy Rating with a
 
-Sentiment Positive Rating produces → Buy
-The positive rating enforces the Analyst decision 
+    Sentiment Positive Rating produces → Buy
+    The positive rating enforces the Analyst decision 
 
-Sentiment Neutral Rating produces → Buy
-No additional value from sentiment analysis 
+    Sentiment Neutral Rating produces → Buy
+    No additional value from sentiment analysis 
 
-Sentiment Negative Rating produces → Hold
-The negative rating gives evidence of possible price decreases 
+    Sentiment Negative Rating produces → Hold
+    The negative rating gives evidence of possible price decreases 
 
 
 ### Directions
