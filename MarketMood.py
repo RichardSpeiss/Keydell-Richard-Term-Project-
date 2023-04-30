@@ -93,10 +93,13 @@ def get_articles(company: str) -> list:
 
     newsapi = NewsApiClient(api_key="f533c47222e44b40a1ae23d73bf08d86")
 
+    today = datetime.date.today()
+    start = today - datetime.timedelta(days=25)
+
     all_articles = newsapi.get_everything(
         q=company,
-        from_param="2023-03-29",
-        to="2023-04-28",
+        from_param=start,
+        to=today,
         language="en",
         sort_by="relevancy",
         page=1,
@@ -141,7 +144,7 @@ def get_content(article: dict) -> str:
     return content
 
 
-def get_sentiment(content: str) -> str:
+def get_sentiment(content: str) -> float:
     """analyse sentiment of an article's content using flair and return score
     in as a positive or negative value, input is article content"""
 

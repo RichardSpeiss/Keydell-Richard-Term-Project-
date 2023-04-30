@@ -1,12 +1,10 @@
 import yfinance as yf
 import pandas as pd 
+import datetime
 
 
-def get_previous_close(ticker:str) -> float:
-    """returns the previous closing price for the stock using y.finance, given ticker"""
-    stock = yf.Ticker(ticker)
-    price = stock.history(period='5d').Close.backfill().iloc[-1]
-    return price    
+today = datetime.date.today()
+start = today -  datetime.timedelta(days=25)
 
-
-print(get_previous_close('MSFT'))
+print(today)
+print(start)
