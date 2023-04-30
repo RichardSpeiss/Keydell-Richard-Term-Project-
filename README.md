@@ -1,134 +1,75 @@
 # Keydell-Richard-Term-Project-
 
-Keydell Fuller and Rich Speiss
+Keydell Fuller and Richard Speiss
+Spring 2023
 
 
-# The Big Idea:
+## Purpose:
 
-Our project is focused on using API, JSON, flask, natural language processing, and website interface design technologies to develop a website that provides investors with a real-time stock rating based on a variety of data sources when it is provided with a ticker symbol. These sources would include recent news articles mentioning the company and the yahoo finance page for the stock. Our program will cross reference its own natural language processing sentiment analysis on the news articles with the yahoo finance stock data to produce its stock rating output of either buy, hold, or sell.
+Our project is focused on using y.finance and flair sentiment analysis to create trade recommendations for given stocks, as well as those trending on yahoo finance. We hope to streamline the investing process for those new to stock market investing and help them progess more quickly to more advanced trading strategies. While our product does provide trade recomendations, we urge users to be cautious and use their own judgement when trading stocks. We are not liable for any financial consequences resulting from the use of our product. 
 
-Our website will allow busy individuals seeking to enter the investment market a way to start investing without paying exorbitant subscription fees or spending time reviewing individual sites. By leveraging the power of data and advanced technologies, we believe that our project has the potential to bring a new generation of investors to the market.
+## Technologies
+Our script primarily uses y.finance, flair, and News API. y.finance is an open source library that allows its users to access stock data from yahoo fiance. Flair is an articifial inteligence based sentiment analysis tool. News API returns JSON formatted news articles relating to a specified keyword using a specified timeframe, source, and organization type. In addition to these modules, our product imports pandas, rquests, datetime, csv, and os.  
 
-# Learning Objectives:
 
-Our learning objectives are listed below. However, we are not going to limit ourselves to just the following list. These are goals in terms of what we want to learn about but we most certainly hope to learn much more during this term project.
+## Code
+Our script defines and calls over 10 functions to produce output. The market_mood() function is the structure of our code. The input is a list of query ticker symbols, and the output is a dictionary of dictionaries. The primary keys of the dictionary are full company names for each inputted stock. The [trending](https://finance.yahoo.com/trending-tickers) yahoo finance stocks are also included. The value of each company key is its own dictionary. The secondary keys are Ticker, Previous Close, Type, Analyst Rating, Sentiment Rating, and MarketMood Rating. The dictionary then passes through the crete_csv() function which creates a csv of the data in the clonned repositories data folder. Running the code will rewrite an existing file from the same day, as the date is included in the file name. 
 
--   Learn what it takes to create a useful piece of code 
+1. Ticker
+Tickers part of the initial query list are listed as such. The grab_trending_tickers() function returns the tickers of the trending stocks on yahoo finance using y.finance. This function is embeded in the target_stocks() function, which is part of market_mood(). 
 
--   Learn about what an attainable goal is in regard to software development
+2. Previous Close
+The previous closeing price from the most recent trading day for each ticker is returned by get_previous_close(). 
 
--   Learn the process of an official coding project from ideation to production
+3. Type*
+Each ticker is has type query or trending. Query tickers are those inputted into market_mood(), and trending tickers are those from the yahoo finance trending stocks page.
 
--   Learn coding project management skills
+4. Analyst Rating
+The Analyst rating for each ticker is returned by analyst_rating() using y.finance. There are five common ratings: Strong Buy, Buy, Hold, Sell, and Strong Sell. 
 
--   Learn how to create an API
+5. Sentiment Rating
+The Sentiment rating of each ticker is returned by average_sentiment(). The flair sentiment analysis is initiated by the get_articles() function, which uses News API to return a list of recent news Yahoo Entertainment articles with the company name as a keyword. The average_sentiment() function encases the get_content() and get_sentiment() function. The get_content() function cycles through the list and returns a string of the first 25 words for each article. The get_sentiment() function retuns the positive or negative flair sentiment value. The average_sentiment() function completes the sentiment analysis process by averaging the values of the five most relevant articles, and produces a 'negative', 'neutral', or 'positive' sentiment rating. 
 
--   Coding Creativity and coding problem-solving
+6. MarketMood Rating
+The MarketMood Rating is produced by the combine_scoreandrating() function. It uses the Analyst Rating and Sentiment Rating to produce the MarketMood Rating. It uses the following rules to produce its output. 
 
-# Implementation Plan
+## Output 
 
-1.  After receiving the response from this proposal, solidify the scope and requirements of the project, including the types of data sources to be used, the features of the user interface, and the desired output format for the stock rating.
+* Analyst Sell or Strong Sell Rating with a
 
-2.  Identify and select the necessary APIs and data sources to gather the required information for the project.
+    Sentiment Positive Rating produces → Hold  
+    The positive rating gives evidence of possible price increases
 
-3.  Develop a natural language processing algorithm to analyze recent news articles related to a given company and determine the overall sentiment expressed in those articles.
+    Sentiment Neutral Rating produces → Sell  
+    No additional value from sentiment analysis 
 
-4.  Develop a parser to gather stock data from the Yahoo Finance API, including real-time stock prices, historical prices, and other relevant financial ratios.
+    Sentiment Negative Rating produces → Sell  
+    The negative rating enforces the Analyst decision 
 
-5.  Develop a software function that utilizes data from Yahoo to compute the implied value of the given stock
+        
+* Analyst Hold Rating with a
 
-6.  Develop a software function that gathers the stock rating provided by yahoo finance. 
+    Sentiment Positive Rating produces → Buy  
+    The positive rating gives evidence of possible price increases
 
-7.  Develop a code that cross-references the importance-weighted inputs (implied stock value, the yahoo stock rating, and the sentiment analysis results) to determine the recommended stock position of buy, hold or sell. 
+    Sentiment Neutral Rating produces → Hold  
+    No additional value from sentiment analysis 
 
-8.  Use flask to design a user interface for both the input and output of the program
+    Sentiment Negative Rating produces → Sell  
+    The negative rating gives evidence of possible price decreases 
 
-9.  Test the website and the algorithms with a range of different stocks and news articles to ensure the accuracy and reliability of the results.
 
-10. Incorporate user feedback to refine the website interface and optimize the algorithms for improved performance and usability.
+* Analyst Buy or Strong Buy Rating with a
 
-11. Launch the website and begin promoting it to potential users through targeted marketing campaigns, partnerships with financial institutions, and other relevant channels.
+    Sentiment Positive Rating produces → Buy  
+    The positive rating enforces the Analyst decision 
 
-12. Get an A
+    Sentiment Neutral Rating produces → Buy  
+    No additional value from sentiment analysis 
 
-# Project Schedule
+    Sentiment Negative Rating produces → Hold  
+    The negative rating gives evidence of possible price decreases 
 
--   Project identification & Begin project proposal work  -  03/27
 
--   Project proposal final review - 04/04
-
--   Project tasking (dividing up roles) & Create project roadmap - 04/07
-
--   Finished roadmap for website and code - 04/08
-
--   Project coding begins - 04/09
-
--   Website development begins & Code halfway check-in - 04/15
-
--   Website halfway check-in - - 04/19
-
--   Final code testing - 04/20
-
--   Presentation prep begins - 04/21
-
--   Final website review & Presentation complete and ready - 04/24
-
-# Collaboration Plan:
-
-## Communication
-
--   Platforms 
-
--   Slack for immediate communication 
-
--   Github for code pushes and updating 
-
--   G-Drive for files and documentation 
-
--   Google calendar and Google meets for meetings and scheduling 
-
--   Meetings twice a week to sync 
-
--   Task and project area division to optimize time management 
-
--   Weekly integration of divided portions to test integration ability
-
-## Ensuring collaboration 
-
--   We agree as a team to respond to slack communications daily if not more multiple times per day.
-
--   We agree to ensure we manage our other responsibility effectively so that they do not encroach on the success of this project
-
--   We agree to attend class so that we can have an in-person check-in twice a week in addition to our meetings
-
-## Reasoning 
-
--   Keydell lives off campus so it makes the most sense to work separately and collaborate via Webex twice a week.
-
--   We are both confident in our ability to problem solve and debug independently with the help of chatGPT and other online resources.
-
-# Risks and Limitations: 
-
-Below we have listed some of the expectations of this project. We plan to follow these points as a guideline to ensure that we remain focused on the project. At any point during the project, we can refer to this list to either recheck ourselves or remind each other of the expectations.
-
--   Minimum achievement of the MVP 
-
--   Setting some reach goals up 
-
--   Staying consistent 
-
--   Dedicating time and effort
-
--   Lack of communication and slow response time
-
--   Procrastination and a load of other classes
-
--   The time crunch of completing the project in less than four weeks.
-
-# Additional Course Content: 
-
-There have been lessons during this semester that will lend a hand to our target term project. The lessons around text analysis and APIs will be the most useful to us. Our project will lean heavily on API access for information gathering. The project will then need text analysis to interpret the data that has been collected. Below we have listed a few of the sessions that will potentially be helpful.
-
--   [Session 14](https://www.freecodecamp.org/news/what-is-an-api-in-english-please-b880a3214a82/)
-
--   [Session 15](https://github.com/OIM3640/resources/blob/master/notebooks/13%20-%20Case%20-%20Text%20Analysis.ipynb)
+## Directions
+To use this code, fist clone this repository on your computer. Input any stock tickers you wish to get a rating for in the mytickers[] list. After running the code, the CSV file will be created in the data folder of the repository with the date. Running the code after previously running it the same day will rewrite the CSV file. 
